@@ -1,18 +1,18 @@
 import os
-import requests
 
-from flask import Flask, render_template, request
-# from flask_socketio import SocketIO, emit
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-# socketio = SocketIO(app)
+socketio = SocketIO(app)
 
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/chat")
-def chat():
-    return render_template("chat.html")
+@socketio.on("submit chat")
+def chat(data):
+    selection = data["selection"]
+    emit("announce chat", {"selection": selection}, broadcast=True)
