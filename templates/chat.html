@@ -1,19 +1,24 @@
-{% extends "layout.html" %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block title %}
-    CS50 Chat
-{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+    <title>Hello, {{ nickname }}</title>
+  </head>
+  <body>
+    <h1>Welcome to CS50 Chat</h1>
+    <hr>
+        <div id="chat">
 
-{% block body %}
-    <h1>CS50 Chat</h1>
-<div>
-
-</div>
-<div>
-
-</div>
-<div>
-<input type="text">
-<button class="btn btn-primary">Send</button>
-</div>
-{% endblock %}
+        </div>
+        <div id="send">
+          <button type="button" send-chat>Send</button>
+        </div>
+  </body>
+</html>

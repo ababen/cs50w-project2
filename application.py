@@ -12,6 +12,10 @@ socketio = SocketIO(app)
 def index():
     return render_template("index.html")
 
+@app_route("/chat")
+def chat():
+    return render_template("chat.html")
+
 @socketio.on("submit chat")
 def chat(data):
     selection = data["selection"]
