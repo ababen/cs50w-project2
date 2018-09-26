@@ -4,22 +4,31 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('#form').onsubmit = function() {
+            const nickname = document.querySelector('#nickname').value;
+            localStorage.setItem('nickname', nickname)
+        };
+    });
+
+    </script>
     <!-- Bootstrap CSS -->
+    <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    -<script src="{{ url_for('static', filename='index.js') }}"></script>
-    <title>Hello, world!</title>
+    -->
+
+    <title>CS50 Flack</title>
   </head>
   <body>
-    <h1>Welcome to CS50 Chat</h1>
+    <h1>Welcome to CS50 Flack Chat</h1>
     <hr>
         <div>
-            <form id="form" method="POST">
-            <input type="text" id="nickname" placeholder="Nickname" autocomplete="off" autofocus>
-            <input type="submit" id="button" value="Enter Chat">
-        </form>
+          <form id="form">
+              <input id="nickname" autocomplete="off" autofocus placeholder="Nickname" type="text">
+              <input type="submit">
+          </form>
         </div>
-        <div id="result"></div>
-  </body>
+      </body>
 </html>

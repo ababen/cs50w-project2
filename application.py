@@ -1,6 +1,7 @@
 import os
+import requests
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -12,11 +13,11 @@ socketio = SocketIO(app)
 def index():
     return render_template("index.html")
 
-@app_route("/chat")
+@app.route("/chat")
 def chat():
     return render_template("chat.html")
 
-@socketio.on("submit chat")
-def chat(data):
-    selection = data["selection"]
-    emit("announce chat", {"selection": selection}, broadcast=True)
+@socketio.on("send message")
+def sendchat(data):
+    message = "Hello"
+    emit("announce chat", {"message": message}, broadcast=True)
