@@ -17,7 +17,9 @@ def index():
 def chat():
     return render_template("chat.html")
 
+messages = {}
+
 @socketio.on("send message")
-def sendchat(data):
-    message = "Hello"
+def sendchat(message_single):
+    message = messagevalue
     emit("announce chat", {"message": message}, broadcast=True)
