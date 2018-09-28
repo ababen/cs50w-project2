@@ -1,5 +1,5 @@
 import os
-import requests
+# import requests
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
@@ -21,5 +21,8 @@ messages = {}
 
 @socketio.on("send message")
 def sendchat(message_single):
-    message = messagevalue
-    emit("announce chat", {"message": message}, broadcast=True)
+    # return render_template("error.html", message=message_single)
+    emit("announce chat", {"message_single": message_single}, broadcast=True)
+
+if __name__ == '__main__':
+    socketio.run(app)

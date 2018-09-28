@@ -1,1 +1,10 @@
-env "FLASK_APP=application.py" "FLASK_ENV=development""FLASK_DEBUG=1" flask run
+{% extends "layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <h1>Error</h1>
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+{% endblock %}
