@@ -1,7 +1,7 @@
 import os
 
-from flask import Flask, render_template, request
-from flask_socketio import SocketIO, emit
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -20,11 +20,8 @@ def chat():
 @socketio.on("send message")
 def send(data):
     messages1.update(data)
-    # Need to add channel selection -------------------------------------------------------
-    # nickname = data["nickname"]
-    # message = data["message"]
-    # timestamp = data["timestamp"]
-    emit("announce chat", messages1, broadcast=True)
+    room = data['room']
+    emit("announce chat", messages1, broadcast=True, room=room)
 
 @socketio.on('join')
 def on_join(data):

@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('room')) {
         var room = "default";    
         localStorage.setItem('room', room);
+    } else {
+        document.querySelector('#room').innerHTML = room;
     }
-    
-    document.querySelector('#room').innerHTML = room;
 
     // By default, submit button is disabled
     document.querySelector('#submit').disabled = true;
@@ -31,22 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Button should emit a 'join' room event
         document.querySelector('#select_channel').onsubmit = () => {
-                var room = document.querySelector('#channel').value
-                var data = [{}];
-                data.room = room
-                data.nickname = localStorage.getItem('nickname');
+            var data = {
+                    'nickname': localStorage.getItem('nickname').timestamp,
+                    'room': document.querySelector('#channel').value
+            };
+                localStorage.setItem('room', document.querySelector('#channel').value);
+                socket.emit('leave', data);
                 socket.emit('join', data);
-
             return false;
         };
 
         // Button should emit a "send meesage" event
         document.querySelector('#new-message').onsubmit = () => {
-
-            // const nickname = localStorage.getItem('nickname');
             var date = new Date();
             var timestamp = date.getTime();
-            var room = "/"
+            var room = ""
             var data = {
                 'message': document.querySelector('#message').value,
                 'timestamp': timestamp,
