@@ -18,9 +18,9 @@ def chat():
 
 @socketio.on("send message")
 def send(data):
-    messages = {}
-    messages.update(data)
+    # messages1 = {}
+    # messages1.update(data)
     # nickname = data["nickname"]
     # message = data["message"]
     # timestamp = data["timestamp"]
-    emit("announce chat", {"messages": messages}, broadcast=True)
+    emit("announce chat", data, broadcast=True)

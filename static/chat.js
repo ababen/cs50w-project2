@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    
     // By default, submit button is disabled
     document.querySelector('#submit').disabled = true;
 
@@ -23,10 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // const nickname = localStorage.getItem('nickname');
                 var date = new Date();
                 var timestamp = date.getTime();
-
-                var json1 = {'message': document.querySelector('#message').value, 'timestamp': timestamp, 'nickname': localStorage.getItem('nickname')};
-
-                socket.emit('send message', {'data': json1});
+                var data = {'message': document.querySelector('#message').value, 'timestamp': timestamp, 'nickname': localStorage.getItem('nickname')};
+                             
+                socket.emit('send message', data);
                 
                 // Clear input field and disable button again
                 document.querySelector('#message').value = '';
@@ -35,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // When a new vote is announced, add to the unordered list
-    socket.on('announce chat', messages => {
-        alert(messages.nickname + " " + messages.timestamp + " " + messages.message);
+    socket.on('announce chat', data => {
         const li = document.createElement('li');
-        li.innerHTML = `${messages.nickname}`;
+        li.innerHTML = `From: ${data.nickname} at ${data.timestamp} says ${data.message}`;
         document.querySelector('#messages').append(li);
+        return false;
     });
 });
