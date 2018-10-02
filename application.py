@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
+messages1 = {}
 
 @app.route("/")
 def index():
@@ -18,9 +19,9 @@ def chat():
 
 @socketio.on("send message")
 def send(data):
-    # messages1 = {}
-    # messages1.update(data)
+    messages1.update(data)
+    # Need to add channel selection -------------------------------------------------------
     # nickname = data["nickname"]
     # message = data["message"]
     # timestamp = data["timestamp"]
-    emit("announce chat", data, broadcast=True)
+    emit("announce chat", messages1, broadcast=True)
