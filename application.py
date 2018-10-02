@@ -1,5 +1,4 @@
 import os
-# import requests
 
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
@@ -17,12 +16,11 @@ def index():
 def chat():
     return render_template("chat.html")
 
-messages = {}
-
 @socketio.on("send message")
-def sendchat(message_single):
-    # return render_template("error.html", message=message_single)
-    emit("announce chat", {"message_single": message_single}, broadcast=True)
-
-if __name__ == '__main__':
-    socketio.run(app)
+def send(data):
+    messages = {}
+    messages.update(data)
+    # nickname = data["nickname"]
+    # message = data["message"]
+    # timestamp = data["timestamp"]
+    emit("announce chat", {"messages": messages}, broadcast=True)

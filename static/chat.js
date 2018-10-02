@@ -20,16 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Button should emit a "send meesage" event
         document.querySelector('#new-message').onsubmit = () => {
 
-                const nickname = localStorage.getItem('nickname');
+                // const nickname = localStorage.getItem('nickname');
                 var date = new Date();
                 var timestamp = date.getTime();
-                var message_single = []
 
-                // message_single[0] = document.querySelector('#message').value;
-                // message_single[1] = timestamp;
-                // message_single[2] = nickname;
-                socket.emit('send message', {'data': 'I\'m connected!'});
-                alert(message_single);
+                var json1 = {'message': document.querySelector('#message').value, 'timestamp': timestamp, 'nickname': localStorage.getItem('nickname')};
+
+                socket.emit('send message', {'data': json1});
                 
                 // Clear input field and disable button again
                 document.querySelector('#message').value = '';
@@ -38,10 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // When a new vote is announced, add to the unordered list
-    socket.on('announce chat', message_single => {
-        alert(message_single);
+    socket.on('announce chat', messages => {
+        alert(messages.nickname + " " + messages.timestamp + " " + messages.message);
         const li = document.createElement('li');
-        li.innerHTML = `${message_single}`;
+        li.innerHTML = `${messages.nickname}`;
         document.querySelector('#messages').append(li);
     });
 });
