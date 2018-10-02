@@ -19,18 +19,14 @@
     <title>CS50 Flack</title>
   </head>
   <body>
-  <h1>CS50 Flack</h1>
+  <h1>CS50 Flack - Welcome <span id="nickname">{{ nickname }}</span> to <span id="room">{{ room }}</span></h1>
   <hr>
   <div class="row">
-    <div id="channels" class="column"><span>Channels</span>
-    <ul>
-      <li>lobby</li>
-    </ul>
-
-    /** ------------------------  Working on channel sectiction ----------------------------- **/
-
-    <button channel="/">lobby</button><br>
-    <button channel="/fun">fun</button><br>
+    <div id="channels" class="column">
+      <form id="select_channel">
+      <input id="channel" autocomplete="off" placeholder="Channel" type="text">
+      <input id="select_channel" type="Submit">
+      </form>
     </div>
     <div class="column">
     <ul id="messages">

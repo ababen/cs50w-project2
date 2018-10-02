@@ -9,10 +9,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#form').onsubmit = function() {
             const nickname = document.querySelector('#nickname').value;
-            localStorage.setItem('nickname', nickname)
+            if (!localStorage.getItem('nickname'))
+            localStorage.setItem('nickname', nickname));
+            }
         };
-    });
+    
     </script>
+    
     <!-- Bootstrap CSS -->
     <!--
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -24,7 +27,7 @@
     <h1>Welcome to CS50 Flack Chat</h1>
     <hr>
         <div>
-          <form id="form">
+          <form id="form" action="/chat">
               <input id="nickname" autocomplete="off" autofocus placeholder="Nickname" type="text">
               <input type="submit">
           </form>
