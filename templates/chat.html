@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-
+    <script type="text/javascript" charset="utf-8"></script>
     <script src="{{ url_for('static', filename='chat.js') }}"></script>
     <style>
       .row {
@@ -23,7 +23,7 @@
   <hr>
   <div class="row">
     <div id="channels" class="column">
-      <form id="select_channel">
+      <form id="channel-form">
       <input id="channel" autocomplete="off" placeholder="Channel" type="text">
       <input id="select_channel" type="Submit">
       </form>

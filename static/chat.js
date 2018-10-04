@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Display nickname if available
     var nickname = localStorage.getItem('nickname');
+    
     document.querySelector('#nickname').innerHTML = nickname;
 
     //Display room if available
@@ -30,26 +31,33 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on('connect', () => {
 
         // Button should emit a 'join' room event
-        document.querySelector('#select_channel').onsubmit = () => {
+        document.querySelector('#channel-form').onsubmit = () => {
+            var rooms
             var data = {
-                    'nickname': localStorage.getItem('nickname').timestamp,
-                    'room': document.querySelector('#channel').value
+                'nickname': localStorage.getItem('nickname').timestamp,
+                'room': document.querySelector('#channel').value,
+                'rooms': rooms
             };
-                localStorage.setItem('room', document.querySelector('#channel').value);
-                socket.emit('leave', data);
-                socket.emit('join', data);
+
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="">${data.room}</a>`;
+            document.querySelector('#channels').append(li);
+            document.querySelector('#channel').value = "";
+            
+            data.rooms.append(data.room);  
+            socket.emit('join', data);
             return false;
         };
 
         // Button should emit a "send meesage" event
         document.querySelector('#new-message').onsubmit = () => {
-            var date = new Date();
-            var timestamp = date.getTime();
-            var room = ""
-            var data = {
+            let date = new Date();
+            let timestamp = date.getTime();
+            let room = localStorage.getItem('room');
+            let data = {
                 'message': document.querySelector('#message').value,
                 'timestamp': timestamp,
-                'nickname': localStorage.getItem('nickname'),
+                'nickname': room,
                 'room': room
             };
 
@@ -66,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // When a new vote is announced, add to the unordered list
 socket.on('announce chat', messages1 => {
     const li = document.createElement('li');
-    //li.innerHTML = `From: ${data.nickname} at ${data.timestamp} says ${data.message}`;
     li.innerHTML = `From: ${messages1.nickname} at ${messages1.timestamp} says ${messages1.message} in ${messages1.room}`;
     document.querySelector('#messages').append(li);
     return false;
