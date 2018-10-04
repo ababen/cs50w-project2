@@ -8,4 +8,4 @@ Progress:
 -I am stuck on channel selection.
 chat.js and chat.html
 
-I need to figure out how to join a channel and have the messages of that channel only displayed inside that channel.
+I need to figure out how to join a channel and have the messages of that channel only displayed inside that channel.z
