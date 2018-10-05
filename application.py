@@ -20,19 +20,18 @@ def chat():
 @socketio.on("send message")
 def send(data):
     messages1.update(data)
-    room = data['room']
-    emit("announce chat", messages1, broadcast=True, room=room)
+    emit("announce chat", messages1,  broadcast=True)
 
 @socketio.on('join')
 def on_join(data):
     nickname = data['nickname']
     room = data['room']
     join_room(room)
-    send(nickname + ' has entered the room.', room=room)
+    emit(nickname + ' has entered the room.', room=room)
 
 @socketio.on('leave')
 def on_leave(data):
     nickname = data['nickname']
     room = data['room']
     leave_room(room)
-    send(nickname + ' has left the room.', room=room)
+    emit(nickname + ' has left the room.', room=room)

@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When connected, configure buttons
     socket.on('connect', () => {
-
+    /*
         // Button should emit a 'join' room event
         document.querySelector('#select_channel').onsubmit = () => {
             var data = {
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.emit('join', data);
             return false;
         };
-
+    */
+   
         // Button should emit a "send meesage" event
         document.querySelector('#new-message').onsubmit = () => {
             var date = new Date();
@@ -64,11 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 // When a new vote is announced, add to the unordered list
+/*
 socket.on('announce chat', messages1 => {
     const li = document.createElement('li');
     //li.innerHTML = `From: ${data.nickname} at ${data.timestamp} says ${data.message}`;
     li.innerHTML = `From: ${messages1.nickname} at ${messages1.timestamp} says ${messages1.message} in ${messages1.room}`;
     document.querySelector('#messages').append(li);
     return false;
+}); */
+socket.on('announce chat', message1 => {
+    var str = JSON.stringify(message1, null, 2); // spacing level = 2
+    alert(str);
 });
 });
